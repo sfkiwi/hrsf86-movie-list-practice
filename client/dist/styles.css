@@ -1,0 +1,40 @@
+.container {
+  margin-left: 10px;
+}
+
+.movie-details {
+  font-family: 'helvetica';
+  font-size: 16px;
+  line-height: 150%;
+}
+
+.movie-row {
+  clear: both;
+  padding-top: 20px;
+}
+
+.movie-details.bold {
+  font-weight: bold;
+}
+
+.movie-thumbnail {
+  height: 180px;
+}
+
+.col-md {
+  float: left;
+  padding-right: 10px;
+  vertical-align: middle;
+}
+
+.row {
+  vertical-align: middle;
+}
+
+h1 {
+  font-family: helvetica;
+}
+
+h2 {
+  font-family: helvetica;
+}
