@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM  from 'react-dom';
 import MoviesList from './components/MoviesList.jsx';
+import AddMovie from './components/AddMovie.jsx';
+import SearchMovie from './components/Search.jsx';
 
 var movies = [
   { 
@@ -66,22 +68,68 @@ class MovieList extends React.Component {
     super();
 
     this.state = {
-      list: movies
+      list: movies,
+      filteredList: movies
     }
+
+    this.addMovie = this.addMovie.bind(this);
+    this.search = this.search.bind(this);
+    this.searchResults = this.searchResults.bind(this);
+    this.clearSearchResults = this.clearSearchResults.bind(this);
+
+  }
+
+  addMovie(title) {
+    let list = this.state.list;
+
+    list.push({
+      id: list[list.length-1].id + 1,
+      title: title,
+      details: {
+        year: 2017,
+        runtime: 100,
+        metascore: 50,
+        imdb: 'http://www.imdb.com',
+        thumbnail: 'http://www.citypages.com/img/movie-placeholder.gif'
+      }
+    });
+
+    this.setState({
+      list: list
+    });
+  }
+
+  searchResults(results) {
+    this.setState({ filteredList: results });      
+  }
+
+  clearSearchResults() {
+    this.setState({filteredList: this.state.list});
+  }
+
+  search(title) {
+    return new Promise((resolve, reject) => {
+      let filteredList = this.state.list.filter(movie =>
+        movie.title.toLowerCase().includes(title.toLowerCase())
+      );
+
+      resolve(filteredList);
+    })
   }
 
   render() {
-    console.log(this.state.list);
     return (
       <div className="container" >
         <div id="header" className="row">
           <h2>MovieList</h2>
         </div>
         <div id="control" className="row">
+          <AddMovie addMovie={this.addMovie} />
+          <SearchMovie search={this.search} searchResults={this.searchResults} clearSearch={this.clearSearchResults} />
         </div>
         <div id="list" className="row">
           <div className="col-md">
-            <MoviesList className="movies-list" list={this.state.list} />
+            <MoviesList className="movies-list" list={this.state.filteredList} />
           </div>
         </div>
       </div>

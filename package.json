@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "server": "nodemon ./server/index.js",
+    "server-debug": "nodemon --inspect ./server/index.js",
     "react-dev": "webpack -d --watch ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

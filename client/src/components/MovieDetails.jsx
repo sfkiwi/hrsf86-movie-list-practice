@@ -7,14 +7,10 @@ class MovieDetails extends React.Component {
     this.state = {
       watched: false
     };
-    console.dir(props);
   }
 
   render() {
-    
-    if (this.state.watched) {
-      console.log(this.state.watched);
-    }
+
     return (
       <div className="movie-details-row" >
         <div className="col-md" >
