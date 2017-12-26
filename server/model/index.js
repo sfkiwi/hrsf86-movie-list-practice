@@ -75,26 +75,17 @@ module.exports = {
     post: function (movie) {
       return new Promise((resolve, reject) => {
 
+        console.log(movie);
+
         if (!movie.title) {
           console.error('Invalid movie object', movie);
           reject(new Error('Invalid movie object'));
           return;
         }
 
-        movies.push({
-          id: movies[movies.length - 1].id + 1,
-          title: movie.title,     
-          details: {
-            year: 2017,
-            runtime: 100,
-            metascore: 50,
-            imdb: 'http://www.imdb.com',
-            thumbnail: 'http://www.citypages.com/img/movie-placeholder.gif'
-          },
-          watched: false
-        });
-
-        resolve(movies[movies.length-1]);
+        movie.watched = false;
+        movies.push(movie);
+        resolve(movie);
 
         console.log('Posting a new movie');
       });

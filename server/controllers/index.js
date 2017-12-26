@@ -19,7 +19,7 @@ module.exports = {
     },
 
     post: function(req, res) {
-      console.log(req.body);
+      
       model.movies.post(req.body)
 
         .then((movie) => {
@@ -37,17 +37,21 @@ module.exports = {
     
     get: function(req, res) {
 
-      movies.load()
+      if (req.query.title) {
 
-        .then(model.load.post)
+        movies.load(req.query.title)
 
-        .then(() => {
-          res.status(200).end();
-        })
+          .then((movie) => {
+            res.status(200).send(movie);
+          })
 
-        .catch((err) => {
-          res.status(400).send('Bad Request');
-        });
-    } 
+          .catch((err) => {
+            res.status(400).send('Bad Request');
+          });
+
+      } else {
+        res.status(400).send('Bad Request')
+      } 
+    }
   }
 };

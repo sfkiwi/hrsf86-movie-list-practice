@@ -6,7 +6,7 @@ import SearchMovie from './components/Search.jsx';
 import http from 'axios';
 
 http.defaults.baseURL = 'http://localhost:3000';
-http.defaults.headers.post['Content-Type'] = 'application/json';
+http.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
 
 
 
@@ -61,10 +61,13 @@ class MovieList extends React.Component {
   addMovie(title) {
 
     let list = this.state.list;
-
-    return http.post('/movies', {
-      title: title
+    return http.get('/load', {
+      params: {
+        title: title
+      }
     })
+
+      .then(movie => http.post('/movies', movie.data))
 
       .then((response) => {
         list.push(response.data);
@@ -74,7 +77,9 @@ class MovieList extends React.Component {
         });
       })
 
-      .catch(console.error.bind(console));;
+      .catch((error) => {
+        //console.error.bind(console));;
+      });
   }
 
   searchResults(results) {
