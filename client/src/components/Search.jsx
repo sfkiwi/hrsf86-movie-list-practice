@@ -39,7 +39,6 @@ class Search extends React.Component {
   }
 
   render() {
-    console.log("Rendering Search View");
     let button;
 
     if (this.state.searchResults) {

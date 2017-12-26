@@ -8,6 +8,10 @@
   line-height: 150%;
 }
 
+.movie-details.hide {
+  display:none;
+}
+
 .movie-row {
   clear: both;
   padding-top: 20px;
