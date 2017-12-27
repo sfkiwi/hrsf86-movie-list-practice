@@ -5,42 +5,68 @@ class Filter extends React.Component {
     super(props);
 
     this.state = {
-      filterToWatch: false,
-      filterWatched: false
-    }
+      value: '',
+      watched: false,
+      toWatch: false
+    };
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
+    this.handleWatched = this.handleWatched.bind(this);
+    this.handleToWatch = this.handleToWatch.bind(this);
+    this.handleClear = this.handleClear.bind(this);
   }
 
-  handleSubmitToWatch(event) {
-      this.setState({ 
-        filterToWatch: !this.state.filterToWatch
-      });
+  handleChange(event) {
+    console.log('Changed');
+    
+    this.setState({ value: event.target.value });
+    this.props.search(event.target.value);
+  }
 
-      this.props.filter('towatch', eventhis.state.filterToWatch)
-        .then((results) => {
-          this.props.searchResults(results)
-          this.setState({ searchResults: true });
-        });
-
-      event.preventDefault();
-    }
-
-  handleSubmitWatched(event) {
-    this.setState({
-      filterWatched: !this.state.filterWatched
+  handleWatched(event) {
+    console.log('Watched');
+    
+    this.setState({ 
+      watched: true,
+      toWatch: false
     });
-    event.preventDefault();
+
+    this.props.watched({
+      watched: true,
+      toWatch: false,
+    });
+  }
+
+  handleToWatch(event) {
+    console.log('ToWatch');
+    this.setState({ 
+      toWatch: true,
+      watched: false 
+    });
+
+    this.props.watched({
+      watched: false,
+      toWatch: true,
+    });
+  }
+
+  handleClear(event) {
+    this.setState({
+      toWatch: false,
+      watched: false,
+      value: ''
+    });
+    this.props.clearFilters()
   }
 
   render() {
-
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input type="submit" value="Watched" name="ToWatch"/>
-        <input type="submit" value="To Watch" name="Watched"/>
-      </form>
+      <div>
+        <input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Search..." />
+        <input type="submit" value="Watched" onClick={this.handleWatched} placeholder="Search..." />
+        <input type="submit" value="To Watch" onClick={this.handleToWatch} placeholder="Search..." />      
+        <input type="submit" value="Clear" onClick={this.handleClear}/>
+      </div>      
     );
   }
 }

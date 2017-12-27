@@ -39,15 +39,17 @@ module.exports = {
       let moviesArray = movies.map((movie) => (
         [
           movie.id,
-          movie.title,
-          movie.year,
-          movie.overview,
-          movie.rating,
-          movie.thumbnail,
-          movie.genre,
-          movie.watched,
+          movie.title || null,
+          movie.year || null,
+          movie.overview || null,
+          movie.rating || null,
+          movie.thumbnail || null,
+          movie.genre || null,
+          movie.watched || 0,
         ]
       ));
+
+      console.log(moviesArray[0]);
 
       return db.insertMany(moviesArray)
 

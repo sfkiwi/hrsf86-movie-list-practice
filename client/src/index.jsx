@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM  from 'react-dom';
 import MoviesList from './components/MoviesList.jsx';
 import AddMovie from './components/AddMovie.jsx';
-import SearchMovie from './components/Search.jsx';
+import Filter from './components/Filter.jsx';
 import http from 'axios';
 
 http.defaults.baseURL = 'http://localhost:3000';
@@ -27,9 +27,8 @@ class MovieList extends React.Component {
 
     this.addMovie = this.addMovie.bind(this);
     this.setSearchQuery = this.setSearchQuery.bind(this);
-    this.clearSearchQuery = this.clearSearchQuery.bind(this);
     this.setFilter = this.setFilter.bind(this);
-    this.clearFilter = this.clearFilter.bind(this);
+    this.clearFilters = this.clearFilters.bind(this);
     this.setWatched = this.setWatched.bind(this);
   }
 
@@ -37,7 +36,7 @@ class MovieList extends React.Component {
     return http.get('/load')
 
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status === 301) {
           this.getMovies();
         } else {
           throw 'Server responded with an Error'
@@ -55,6 +54,7 @@ class MovieList extends React.Component {
       .then((response) => {
         if (response.status === 200) {
           this.list = response.data;
+          //this.applySearch(this.list);
           this.applySearch(this.list);
         } else {
           throw 'Server responded with an Error';
@@ -89,12 +89,8 @@ class MovieList extends React.Component {
   }
 
   setSearchQuery(title) {
-      this.searchQuery = title
-      this.applySearch(this.list);
-  }
-
-  clearSearchQuery() {
-    this.searchQuery = false;
+    console.log('Search Query ', title);
+    this.searchQuery = title
     this.applySearch(this.list);
   }
 
@@ -104,6 +100,8 @@ class MovieList extends React.Component {
       list = list.filter(movie =>
         movie.title.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
+
+      console.log('Search List ', list);
     }
 
     this.applyFilters(list);
@@ -111,27 +109,33 @@ class MovieList extends React.Component {
 
   setFilter(filter) {
     this.filter = filter;
-    this.applyFilters(list);
-  }
-
-  clearFilter() {
-    this.filter = false;
-    this.applyFilters(list)
+    this.applySearch(this.list);
   }
 
   applyFilters(list) {
 
     if (this.filter) {
-      list = list.filter(movie =>
-        movie[this.filters.filter] === this.filters.value);
+
+      console.log('Filters ', this.filter);
+      list = list.filter(movie => movie.watched == this.filter.watched);
+
+      console.log('Filtered List ', list);
     }
     this.updateView(list);
+  }
+
+  clearFilters() {
+    this.searchQuery = false;
+    this.filter = false;
+    this.applySearch(this.list);
   }
 
   updateView(list) {
     this.setState({
       filteredList: list
     })
+
+    //console.log('Rendered View', list);
   }
 
   render() {
@@ -143,7 +147,7 @@ class MovieList extends React.Component {
           </div>
           <div id="control" className="row">
             <AddMovie addMovie={this.addMovie} />
-            <SearchMovie search={this.setSearchQuery} clearSearch={this.clearSearchQuery} />
+            <Filter search={this.setSearchQuery} watched={this.setFilter} clearFilters={this.clearFilters} />
           </div>
           <div id="list" className="row">
             <div className="col-md">

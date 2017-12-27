@@ -45,11 +45,11 @@ module.exports = {
 
         .then((movies) => (
           model.movies.insertMany(movies)
-          ))
+        ))
         
-        .then(() => {
-          res.status(200).end();
-        })
+        .then(() => (
+          res.redirect(301, '/')
+        ))
 
         .catch((err) => {
           res.status(503).send('Server unable to retrieve Movies');
