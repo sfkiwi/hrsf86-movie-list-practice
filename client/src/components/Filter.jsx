@@ -5,7 +5,6 @@ class Filter extends React.Component {
     super(props);
 
     this.state = {
-      filter: false,
       filterToWatch: false,
       filterWatched: false
     }
@@ -14,14 +13,12 @@ class Filter extends React.Component {
     this.handleSearch = this.handleSearch.bind(this);
   }
 
-  handleSubmit(event) {
-    if (event.target.name == 'ToWatch') {
+  handleSubmitToWatch(event) {
       this.setState({ 
-        filter: !this.state.filter,
         filterToWatch: !this.state.filterToWatch
       });
 
-      this.props.filter(event.target.name)
+      this.props.filter('towatch', eventhis.state.filterToWatch)
         .then((results) => {
           this.props.searchResults(results)
           this.setState({ searchResults: true });
@@ -30,13 +27,11 @@ class Filter extends React.Component {
       event.preventDefault();
     }
 
-    if (event.target.name == 'Watched') {
-      this.setState({
-        filter: !this.state.filter,
-        filterWatched: !this.state.filterWatched
-      });
-      event.preventDefault();
-    }
+  handleSubmitWatched(event) {
+    this.setState({
+      filterWatched: !this.state.filterWatched
+    });
+    event.preventDefault();
   }
 
   render() {

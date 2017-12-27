@@ -7,7 +7,7 @@ module.exports = {
     
     get: function(req, res) {
 
-      model.movies.get()
+      model.movies.selectAll()
 
         .then((movies) => {
           res.status(200).send(movies);
@@ -20,11 +20,15 @@ module.exports = {
 
     post: function(req, res) {
       
-      model.movies.post(req.body)
+      movies.getMovieDetails(req.body.title)
 
-        .then((movie) => {
-          res.status(200).send(movie);
-        })
+        .then((movie) => (
+          model.movies.insertOne(movie)
+        ))
+
+        .then(() => (
+          res.status(201).end()
+        ))
 
         .catch((err) => {
           console.error(err.message);
@@ -37,21 +41,35 @@ module.exports = {
     
     get: function(req, res) {
 
-      if (req.query.title) {
+      movies.load()
 
-        movies.load(req.query.title)
+        .then((movies) => (
+          model.movies.insertMany(movies)
+          ))
+        
+        .then(() => {
+          res.status(200).end();
+        })
 
-          .then((movie) => {
-            res.status(200).send(movie);
-          })
+        .catch((err) => {
+          res.status(503).send('Server unable to retrieve Movies');
+        });
+    } 
+  },
 
-          .catch((err) => {
-            res.status(400).send('Bad Request');
-          });
+  watched: {
 
-      } else {
-        res.status(400).send('Bad Request')
-      } 
+    patch: function(req, res) {
+      console.log(req.body);
+      model.movies.updateWatched(req.body.id, req.body.watched)
+
+        .then(() => {
+          res.status(200).end();
+        })
+
+        .catch((err) => {
+          res.status(400).send('Serve unable to modify movie attribute');
+        })
     }
   }
 };

@@ -8,20 +8,19 @@ class WatchedMovie extends React.Component {
     this.state = {
       watched: props.watched
     };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit() {
+  handleSubmit(event) {
     this.setState({watched: !this.state.watched});
-    this.props.onWatched(this.state.watched);
+    this.props.onWatched(!this.state.watched);
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          watched:
-          <input type="checkbox" value={this.state.watched} />
-        </label>
+      <form onChange={this.handleSubmit}>
+        <input type="checkbox" defaultChecked={this.state.watched} ref="watched" />
       </form>
     );
   }

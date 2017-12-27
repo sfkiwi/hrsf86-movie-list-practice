@@ -2,9 +2,10 @@
   margin-left: 10px;
 }
 
-.movie-details {
+.movie-details-text {
   font-family: 'helvetica';
-  font-size: 16px;
+  font-weight: lighter;
+  font-size: 12px;
   line-height: 150%;
 }
 
@@ -17,10 +18,18 @@
   padding-top: 20px;
 }
 
-.movie-details-bold {
+.movie-details-heading {
   font-weight: bold;
+  font-family: 'helvetica';
+  font-size: 12px;
 }
 
+.movie-details-overview {
+  font-weight: lighter;
+  padding-top: 10px;
+  font-family: 'helvetica';
+  font-size: 12px;
+}
 .movie-thumbnail {
   height: 180px;
 }
@@ -29,6 +38,7 @@
   float: left;
   padding-right: 10px;
   vertical-align: middle;
+  width: 75%;
 }
 
 .row {
