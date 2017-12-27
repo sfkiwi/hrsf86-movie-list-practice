@@ -5,10 +5,6 @@ import AddMovie from './components/AddMovie.jsx';
 import Filter from './components/Filter.jsx';
 import http from 'axios';
 
-import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './styles.css';
-
 http.defaults.baseURL = 'http://localhost:3000';
 http.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
 
@@ -139,24 +135,21 @@ class MovieList extends React.Component {
       filteredList: list
     })
 
-    //console.log('Rendered View', list)
+    //console.log('Rendered View', list);
   }
 
   render() {
-    if (this.state.filteredList) {
-      return (
-        <div className="container">
-          <div className="row">
-            <div className="col-8 bg-primary text-white mb-2">
-              <p className="display-4">MovieList</p>
-            </div>
-          </div>
-          <AddMovie addMovie={this.addMovie} />
-          <Filter search={this.setSearchQuery} watched={this.setFilter} clearFilters={this.clearFilters} />
-          <MoviesList className="movies-list" list={this.state.filteredList} setWatched={this.setWatched} />
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col">Column</div>
+          <div className="col">Column</div>
+          <div className="w-100"></div>
+          <div className="col">Column</div>
+          <div className="col">Column</div>
         </div>
-      );
-    }
+      </div>
+    );
   }
 }
 

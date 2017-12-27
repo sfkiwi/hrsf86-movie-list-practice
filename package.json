@@ -20,15 +20,17 @@
     "bootstrap": "4.0.0-beta.2",
     "express": "^4.16.2",
     "jquery": "3.2.1",
+    "mysql": "^2.15.0",
     "mysql2": "^1.5.1",
     "popper.js": "^1.12.9",
     "react": "^16.1.0",
     "react-dom": "^16.1.0",
     "sequelize": "^4.28.6",
-    "style-loader": "^0.19.1",
     "webpack": "^3.8.1"
   },
   "devDependencies": {
-    "morgan": "^1.9.0"
+    "css-loader": "^0.28.7",
+    "morgan": "^1.9.0",
+    "style-loader": "^0.19.1"
   }
 }

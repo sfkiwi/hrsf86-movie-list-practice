@@ -20,8 +20,13 @@ class WatchedMovie extends React.Component {
   render() {
     return (
       <form onChange={this.handleSubmit}>
-        <input type="checkbox" defaultChecked={this.state.watched} ref="watched" />
-      </form>
+        <div className="form-check ml-4 mt-2">
+          <label className="form-check-lable">
+            <input className="form-check-input" type="checkbox" defaultChecked={this.state.watched} ref="watched" />
+            watched
+          </label>
+        </div>
+      </form>  
     );
   }
 }

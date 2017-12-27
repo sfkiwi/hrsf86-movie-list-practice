@@ -19,18 +19,40 @@ class MovieDetails extends React.Component {
   render() {
 
     return (
-      <div className="movie-details-row" >
-        <div className="col-md" >
-          <img className="movie-thumbnail" src={this.props.movie.thumbnail} />
+      <div className="row">
+        <div className="col-8">
+          <div className="row">
+            <div className="col-12">
+              <p className="h6">{this.props.movie.year} | <b>{this.props.movie.rating}</b> | {this.props.movie.genre}</p> 
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-12">
+              {this.props.movie.overview ? <p className="lead mb-0">{this.props.movie.overview}</p> : ''}
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-12">
+              <WatchedMovie watched={this.props.movie.watched} onWatched={this.setWatched} />
+            </div>
+          </div>
         </div>
-        <div className="col-md" >
-          <div className="movie-details-heading" ><div className="movie-details-text">{this.props.movie.year} | <b>{this.props.movie.rating}</b> | {this.props.movie.genre}</div></div>
-          {this.props.movie.overview ? <div className="movie-details-overiew" ><div className="movie-details-text">{this.props.movie.overview}</div></div> : ''}
-          <WatchedMovie watched={this.props.movie.watched} onWatched={this.setWatched} />
-        </div>        
+        <div className="col-3">
+          <img className="img-fluid img-thumbnail rounded float-left mb-4 align-middle" src={this.props.movie.thumbnail} />
+        </div>
       </div>
     );
   }
 }
 
 module.exports = MovieDetails;
+
+
+
+
+
+  
+
+  
+7
+
