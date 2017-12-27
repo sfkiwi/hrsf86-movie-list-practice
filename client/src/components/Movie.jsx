@@ -6,7 +6,7 @@ class Movie extends React.Component {
     super(props);
 
     this.state = {
-      hideDetails: true
+      hideDetails: false
     }
 
     this.hideDetails = this.hideDetails.bind(this);
