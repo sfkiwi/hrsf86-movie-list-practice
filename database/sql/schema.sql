@@ -6,11 +6,11 @@ USE movies;
 
 CREATE TABLE IF NOT EXISTS movies (
   id          INTEGER,
-  title       VARCHAR(20),
+  title       VARCHAR(100),
   year        VARCHAR(4),
   overview    TEXT(250),
   rating      DECIMAL(6,4),
-  thumbnail   VARCHAR(30),
+  thumbnail   VARCHAR(250),
   genre       VARCHAR(30),
   watched     INT(1),
 
