@@ -22,9 +22,7 @@ module.exports = {
       
       movies.getMovieDetails(req.body.title)
 
-        .then((movie) => (
-          model.movies.insertOne(movie)
-        ))
+        .then(model.movies.insertOne)
 
         .then(() => (
           res.status(201).end()
@@ -43,9 +41,7 @@ module.exports = {
 
       movies.load()
 
-        .then((movies) => (
-          model.movies.insertMany(movies)
-        ))
+        .then(model.movies.insertMany)
         
         .then(() => (
           res.redirect(301, '/')

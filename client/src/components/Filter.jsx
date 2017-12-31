@@ -62,7 +62,7 @@ class Filter extends React.Component {
   render() {
     return (
       <div className="row">
-        <div className="col-md-8 bg-white text-secondary">
+        <div className="col-md-12 bg-white text-secondary">
           <div className="row">
             <input className="col-md-5 btn btn-light mx-2 my-2 text-left" type="text" value={this.state.value} onChange={this.handleChange} placeholder="Search..." />
             <input className="col-md-2 btn btn-secondary mx-2 my-2" type="submit" value="Watched" onClick={this.handleWatched} placeholder="Search..." />

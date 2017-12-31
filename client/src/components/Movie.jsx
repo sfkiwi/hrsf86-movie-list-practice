@@ -33,7 +33,7 @@ class Movie extends React.Component {
 
     return (
       <div className="row">
-        <div className="col-8 border bg-white mb-2">
+        <div className="col-12 border bg-white mb-2">
           <div className="row">
             <div className="col-12 py-3" onClick={this.hideDetails}>
               <span className="h3 align-middle" >{this.props.movie.title}</span>{watched}

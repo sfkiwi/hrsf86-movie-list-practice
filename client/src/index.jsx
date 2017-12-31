@@ -5,10 +5,6 @@ import AddMovie from './components/AddMovie.jsx';
 import Filter from './components/Filter.jsx';
 import http from 'axios';
 
-import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './styles.css';
-
 http.defaults.baseURL = 'http://localhost:3000';
 http.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
 
@@ -147,7 +143,7 @@ class MovieList extends React.Component {
       return (
         <div className="container">
           <div className="row">
-            <div className="col-8 bg-primary text-white mb-2">
+            <div className="col-12 bg-primary text-white mb-2">
               <p className="display-4">MovieList</p>
             </div>
           </div>
