@@ -1,5 +1,3 @@
-//import React from 'react';
-//import Movie from './Movie.jsx';
 const template = require('../templates/movielist.html');
 const MovieListEntryView = require('./movieListEntry');
 
@@ -30,14 +28,3 @@ var MovieListView = Backbone.View.extend({
 
 
 module.exports = MovieListView;
-/*
-
-
-var MoviesList = (props) => {
-
-  return (
-
-  );
-}
-
-module.exports = MoviesList;*/

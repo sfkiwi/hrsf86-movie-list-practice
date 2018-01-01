@@ -1,6 +1,3 @@
-//import React from 'react';
-//import MovieDetails from './MovieDetails.jsx';
-
 const template = require('../templates/movielistentry.html');
 const MovieListEntryDetailsView = require('./movieListEntryDetails');
 const MovieListEntryWatchedView = require('./movieListEntryWatched');
@@ -45,46 +42,3 @@ var MovieListEntryView = Backbone.View.extend({
 });
 
 module.exports = MovieListEntryView;
-
-
-
-
-/*
-class Movie extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      hideDetails: false
-    }
-
-    this.hideDetails = this.hideDetails.bind(this);
-  }
-
-  hideDetails() {
-    this.setState({hideDetails: !this.state.hideDetails});
-  }
-
-  
-
-  render() {
-
-    let details = '';
-    let watched = '';
-
-    if(this.state.hideDetails) {
-      details = <MovieDetails movie={this.props.movie} setWatched={this.props.setWatched} />
-    }
-
-    if(this.props.movie.watched) {
-      watched = <span className="badge badge-secondary align-middle ml-3">watched</span>
-    }
-
-    return (
-
-    );
-  }
-}
-
-module.exports = Movie;*/
-
