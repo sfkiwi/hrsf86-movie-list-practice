@@ -20,6 +20,7 @@ module.exports = {
 
     post: function(req, res) {
       
+      console.log(req.body);
       movies.getMovieDetails(req.body.title)
 
         .then(model.movies.insertOne)

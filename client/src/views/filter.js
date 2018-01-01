@@ -1,5 +1,58 @@
-import React from 'react';
+//import React from 'react';
+const template = require('../templates/filter.html');
 
+
+var FilterView = Backbone.View.extend({
+
+  initialize: function() {
+    this.listenTo(this.collection, 'clear', this.clearSearchField);
+  },
+
+  events: {
+    'click input.filter-watched': 'handleWatched',
+    'click input.filter-towatch': 'handleToWatch',
+    'click input.filter-clear': 'handleClear',
+    'keyup input.filter-title': 'handleKeyUp'
+  },
+
+  handleKeyUp: function() {
+    var query = this.$('.filter-title').val();
+
+    if (query) {
+      this.collection.setTitleFilter(query);
+    }
+  },
+
+  clearSearchField: function() {
+    this.$('.filter-title').val('');
+  },
+
+  handleWatched: function () {
+    console.log('watched');
+    this.collection.setAttributeFilter('watched', true);
+  },
+  
+  handleToWatch: function () {
+    this.collection.setAttributeFilter('watched', false);
+  },
+
+  handleClear: function () {
+    this.collection.clearFilters();
+  },
+
+  render: function() {
+    this.$el.html(this.template());
+    return this;
+  },
+
+  template: _.template(template)
+
+})
+
+module.exports = FilterView;
+
+
+/*
 class Filter extends React.Component {
   constructor(props) {
     super(props);
@@ -61,18 +114,9 @@ class Filter extends React.Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="col-md-12 bg-white text-secondary">
-          <div className="row">
-            <input className="col-md-5 btn btn-light mx-2 my-2 text-left" type="text" value={this.state.value} onChange={this.handleChange} placeholder="Search..." />
-            <input className="col-md-2 btn btn-secondary mx-2 my-2" type="submit" value="Watched" onClick={this.handleWatched} placeholder="Search..." />
-            <input className="col-md-2 btn btn-secondary mx-2 my-2" type="submit" value="To Watch" onClick={this.handleToWatch} placeholder="Search..." />      
-            <input className="col-md-1 btn btn-secondary mx-2 my-2" type="submit" value="Clear" onClick={this.handleClear}/>
-          </div>
-        </div>
-      </div>      
+     
     );
   }
 }
 
-module.exports = Filter;
+module.exports = Filter;*/

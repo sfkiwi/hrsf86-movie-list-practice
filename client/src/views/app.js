@@ -1,25 +1,51 @@
-import React from 'react';
-import ReactDOM  from 'react-dom';
-import MoviesList from './components/MoviesList.jsx';
-import AddMovie from './components/AddMovie.jsx';
-import Filter from './components/Filter.jsx';
-import http from 'axios';
+const template = require('../templates/app.html');
 
-http.defaults.baseURL = 'http://localhost:3000';
-http.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+const Movies = require('../collections/index.js');
 
+const AddMovieView = require('./addMovie');
+const FilterView = require('./filter');
+const MovieListView = require('./movieList');
 
+var AppView = Backbone.View.extend({
 
-class MovieList extends React.Component {
+  el: '#app',
+
+  initialize: function() {
+    this.movies = new Movies();
+    this.movies.getMovies();
+    this.render(this.template);
+  },
+
+  render: function() {
+    this.$el.html(this.template());
+
+    new AddMovieView({
+      collection: this.movies,
+      el: this.$('#addmovie')
+    }).render();
+    
+    new FilterView({
+      collection: this.movies,
+      el: this.$('#filter')
+    }).render();
+
+    new MovieListView({
+      collection: this.movies,
+      el: this.$('#movielist')
+    }).render();
+
+    return this;
+  },
+
+  template: _.template(template)
+})
+
+module.exports = AppView;
+/*
+MovieList extends React.Component {
   constructor() {
     super();
 
-    this.list = [];
-    this.searchQuery = false;
-    this.filter = false;
-
-    this.state = {
-      filteredList: []
     }
 
     //this.loadMovies();
@@ -78,7 +104,7 @@ class MovieList extends React.Component {
   }
 
   setWatched(movieId, watched) {
-    return http.patch('/watched', {id: movieId, watched: watched})
+    return http.patch('/watched', { id: movieId, watched: watched })
 
       .then((response) => {
         if (response.status === 200) {
@@ -139,21 +165,9 @@ class MovieList extends React.Component {
   }
 
   render() {
-    if (this.state.filteredList) {
-      return (
-        <div className="container">
-          <div className="row">
-            <div className="col-12 bg-primary text-white mb-2">
-              <p className="display-4">MovieList</p>
-            </div>
-          </div>
-          <AddMovie addMovie={this.addMovie} />
-          <Filter search={this.setSearchQuery} watched={this.setFilter} clearFilters={this.clearFilters} />
-          <MoviesList className="movies-list" list={this.state.filteredList} setWatched={this.setWatched} />
-        </div>
-      );
-    }
+    
   }
 }
 
-ReactDOM.render( <MovieList />, document.getElementById('app'));
+ReactDOM.render(<MovieList />, document.getElementById('app'));
+*/

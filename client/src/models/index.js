@@ -1,4 +1,20 @@
-const db = require('../../database')
+//var db = require('../../database');
+
+var Movie = Backbone.Model.extend({
+
+  initialize: function(movie) {
+  },
+
+  select: function() {
+    this.trigger('select', this);
+  }
+
+});
+
+module.exports = Movie;
+
+
+/*
 
 module.exports = {
 
@@ -16,14 +32,14 @@ module.exports = {
     insertOne: function (movie) {
 
       let movieArray = [];
-      movieArray[db.keys.id] = movie.id;
-      movieArray[db.keys.title] = movie.title || null;
-      movieArray[db.keys.year] = movie.year || null;
-      movieArray[db.keys.overview] = movie.overview || null;
-      movieArray[db.keys.rating] = movie.rating || null;
-      movieArray[db.keys.thumbnail] = movie.thumbnail || null;
-      movieArray[db.keys.genre] = movie.genre || null;
-      movieArray[db.keys.watched] = movie.watched || 0;
+      movieArray[db.keys.id]          = movie.id;
+      movieArray[db.keys.title]       = movie.title || null;
+      movieArray[db.keys.year]        = movie.year || null;
+      movieArray[db.keys.overview]    = movie.overview || null;
+      movieArray[db.keys.rating]      = movie.rating || null;
+      movieArray[db.keys.thumbnail]   = movie.thumbnail || null;
+      movieArray[db.keys.genre]       = movie.genre || null;
+      movieArray[db.keys.watched]     = movie.watched || 0;
 
       return db.insertOne(movieArray)
 
@@ -33,7 +49,7 @@ module.exports = {
         });
     },
 
-    insertMany: function (movies) {
+    insertMany: function(movies) {
 
       let moviesArray = movies.map((movie) => (
         [
@@ -57,8 +73,8 @@ module.exports = {
           throw 'Error inserting movies into database';
         });
     },
-
-    updateWatched: function (id, value) {
+  
+    updateWatched: function(id, value) {
 
       return db.updateWatched(id, value)
 
@@ -68,3 +84,5 @@ module.exports = {
     }
   }
 };
+
+*/

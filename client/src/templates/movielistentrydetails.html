@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-8">
+    <div class="row">
+      <div class="col-12">
+        <p class="h6"><%= year %> | <b><%= rating %></b> | <%= genre %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <p class="lead mb-0"><%= overview %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <form>
+          <div class="form-check ml-4 mt-2">
+            <label class="form-check-lable">
+              <input class="form-check-input" type="checkbox" /> watched
+            </label>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <img class="img-fluid img-thumbnail rounded float-left mb-4 align-middle" src="<%= thumbnail %>" />
+  </div>
+</div>
